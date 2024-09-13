@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
+    <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToxSpeech - Chat log Toxicity Classifier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <span class="tox">Tox</span><span class="speech">Speech</span>
+        </h1>
+        <p>This program checks whether chat logs you upload contain toxic language.</p>
+        
+        <input type="file" id="fileInput" accept=".txt">
+        <pre id="fileContent"></pre>
+        
+        <button id="classifyButton">Check</button>
+        
+        <p id="loadingText"></p>
+        <p id="resultText"></p>
+    </div>
+</body>
+</html>
