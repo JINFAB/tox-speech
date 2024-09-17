@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('resultText').textContent = '';
             };
             reader.readAsText(file);
-            document.getElementById('loadingText').textContent = 'Uploading the txt file...';
         }
     }
 
@@ -47,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         results[user] = { toxicWords: new Set(), toxicTypes: new Set() };
                     }
                     results[user].toxicTypes.add(prediction.label);
-    
                 }
             });
         }
@@ -55,12 +53,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('loadingText').textContent = '';
     
         let report = '===============Chat Log Report===============<br>';
-        for (const user in results) {
-            const toxicTypes = [...results[user].toxicTypes].join(', ');
-            report += `<div style="margin-bottom: 20px;">${user} is using toxic language<br>`;
-            report += `Type: ${toxicTypes}</div>`;
+    
+        if (Object.keys(results).length === 0) {
+            // If no toxicity is detected, display this message.
+            report += '<div style="margin-bottom: 20px;">No Toxicity detected. The Chat Log is clean!</div>';
+        } else {
+            // If toxicity is detected, display the toxic users and types.
+            for (const user in results) {
+                const toxicTypes = [...results[user].toxicTypes].join(', ');
+                report += `<div style="margin-bottom: 20px;">${user} is using toxic language<br>`;
+                report += `Type: ${toxicTypes}</div>`;
+            }
         }
-        document.getElementById('resultText').innerHTML = report || 'The chat log is clean!';        
+    
+        document.getElementById('resultText').innerHTML = report;
     }
+    
     
 });
